@@ -1,4 +1,4 @@
-Hydra HMG - Quadfire Experimental v0.1.5
+Hydra HMG - Quadfire Experimental v0.1.6
 
 Branch source: proven Hydra v0.1.2 architecture checkpoint.
 
