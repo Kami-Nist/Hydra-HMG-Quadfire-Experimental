@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Item name="Hydra HMG" identifier="hydrahmg" category="Weapon" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,gun,gunsmith,provocativetohumanai,mountableweapon" Scale="0.5" impactsoundtag="impact_metal_light">
+  <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder" />
+  <Price baseprice="500" sold="true" minleveldifficulty="70">
+    <Price storeidentifier="merchantoutpost" multiplier="1.5" />
+    <Price storeidentifier="merchantcity" multiplier="1.25" />
+    <Price storeidentifier="merchantresearch" multiplier="1.25" />
+    <Price storeidentifier="merchantmilitary" multiplier="0.9" sold="true" />
+    <Price storeidentifier="merchantarmory" multiplier="0.9" sold="true" />
+    <Price storeidentifier="merchantmine" multiplier="1.25" />
+  </Price>
+  <Deconstruct time="35">
+    <Item identifier="steel" amount="5" />
+    <Item identifier="titaniumaluminiumalloy" amount="5" />
+    <Item identifier="rubber" />
+  </Deconstruct>
+  <Sprite texture="%ModDir%/Items/Hydra_HMG.png" sourcerect="37,41,287,88" depth="0.55" origin="0.5,0.5" />
+  <Body width="220" height="60" density="30" />
+  <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="55,-20" aimpos="55,-20" handle1="-96,0" handle2="16,-6" holdangle="-30">
+    <Conditional recoilstabilized="lte 0" />
+    <StatusEffect type="Always" target="Character" SpeedMultiplier="0.6" setvalue="true" />
+  </Holdable>
+  <Wearable slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select">
+    <sprite name="Hydra HMG Worn" texture="%ModDir%/Items/Hydra_HMG.png" canbehiddenbyotherwearables="false" rotation="90" sourcerect="36,41,334,89" depth="0.55" limb="Torso" depthlimb="LeftArm" scale="0.5" origin="0.5,0.8" />
+  </Wearable>
+  <RangedWeapon reload="0.15" holdtrigger="true" barrelpos="131,5" spread="0" unskilledspread="20" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.22">
+    <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+    <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+    <ParticleEmitter particle="impactfirearm" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="4.0,4.0" colormultiplier="255,200,200,200" />
+    <StatusEffect target="This" type="OnUse" forceplaysounds="true">
+      <ParticleEmitter particle="casingfirearm" particleamount="1" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+      <Sound file="Content/Items/Weapons/ShotgunShot1.ogg" type="OnUse" range="3000" selectionmode="Random" />
+      <Sound file="Content/Items/Weapons/ShotgunShot2.ogg" type="OnUse" range="3000" />
+      <Sound file="Content/Items/Weapons/ShotgunShot3.ogg" type="OnUse" range="3000" />
+      <Sound file="Content/Items/Weapons/ShotgunShot4.ogg" type="OnUse" range="3000" />
+    </StatusEffect>
+    <StatusEffect type="OnUse" target="This">
+      <Explosion range="180.0" force="2" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="15.0" />
+    </StatusEffect>
+    <!-- Can only be used somewhat succesfully from 75+ skill, as then OnFailure turns it into a skill check per shot <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="45,-20" aimpos="57,-5" handle1="-96,0" handle2="16,-6" holdangle="-30"> -->
+    <StatusEffect type="OnFailure" target="Character" disabledeltatime="true" comparison="and">
+      <Conditional skillrequirement="true" weapons="lt 90" />
+      <Conditional recoilstabilized="lte 0" />
+      <Affliction identifier="stun" strength="0.15" />
+    </StatusEffect>
+    <StatusEffect type="OnUse" target="Character" disabledeltatime="true" comparison="and">
+      <Conditional skillrequirement="true" weapons="lt 70" />
+      <Conditional recoilstabilized="lte 0" />
+      <Affliction identifier="stun" strength="0.3" />
+    </StatusEffect>
+    <StatusEffect type="OnUse" target="Character" disabledeltatime="true" comparison="and">
+      <Conditional skillrequirement="true" weapons="lt 50" />
+      <Conditional recoilstabilized="lte 0" />
+      <Affliction identifier="stun" strength="0.75" />
+    </StatusEffect>
+    <!-- v0.1.4 QUADFIRE EXPERIMENT:
+         Propagate each successful weapon use to all items in the existing
+         four-slot ammo container. Inventory topology remains unchanged. | Volley Fire -->
+    <!-- TODO: Implement a feature that makes it so that the weapon "Volley Fires" but increments the ammunition usage down by 1 for each
+          rounds in each ammo container. Count from slotindex 1-4. Flashlight slotindex = 0 -->
+    <!-- v0.1.5 Quadfire Volley Increment:
+        Expected Behavior: Each successful weapon use will decrement the ammunition in each slot of the container by 1, starting from slotindex 1 to 4. -->
+    <StatusEffect type="OnUse" target="Contained" slotindex = "1">
+      <Use />
+    </StatusEffect>
+    <StatusEffect type="OnUse" target="Contained" slotindex = "2">
+      <Use />
+    </StatusEffect>
+    <StatusEffect type="OnUse" target="Contained" slotindex = "3">
+      <Use />
+    </StatusEffect>
+    <StatusEffect type="OnUse" target="Contained" slotindex = "4">
+      <Use />
+    </StatusEffect>
+    <RequiredItems items="shotgunammo" type="Contained" msg="ItemMsgAmmoRequired" />
+    <RequiredSkill identifier="weapons" level="90" />
+  </RangedWeapon>
+  <Propulsion force="-30" usablein="both" ApplyToHands="false">
+    <RequiredItems items="shotgunammo" type="Contained" />
+  </Propulsion>
+  <!-- v0.1.4 ARCHITECTURE LOCK:
+       Preserve the original HOG inventory topology exactly:
+       one four-slot primary ammunition container plus one flashlight/laser SubContainer.
+       Quadfire experiments must not alter this five-visible-slot layout. | Contains 4 ammo cells, 1 flashlight/laser -->
+  <ItemContainer capacity="4" maxstacksize="12" hideitems="false" ShowTotalStackCapacityInContainedStateIndicator="true" containedstateindicatorstyle="bullet" containedspritedepth="0.56">
+    <Containable items="shotgunammo" hide="false" itempos="0,-10" />
+    <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+    <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+    <SlotIcon slotindex="2" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+    <SlotIcon slotindex="3" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+    <SlotIcon slotindex="4" texture="Content/UI/StatusMonitorUI.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
+    <SubContainer capacity="1" maxstacksize="1">
+      <Containable items="flashlight" hide="false" itempos="30,1" setactive="true" />
+    </SubContainer>
+  </ItemContainer>
+  <aitarget sightrange="2000" soundrange="4000" fadeouttime="5" />
+  <Quality>
+    <QualityStat stattype="FirepowerMultiplier" value="0.1" />
+  </Quality>
+  <SkillRequirementHint identifier="weapons" level="90" />
+</Item>
