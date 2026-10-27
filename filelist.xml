@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<contentpackage name="Hydra HMG - Quadfire Experimental v0.1.6" corepackage="false" modversion="0.1.6" gameversion="1.9.8.0">
+<contentpackage name="Hydra HMG - Quadfire Experimental v0.1.7" corepackage="false" modversion="0.1.7" gameversion="1.9.8.0">
   <Item file="%ModDir%/Items/Weapons/Hydra.xml" />
 </contentpackage>

@@ -62,10 +62,10 @@
     <!-- v0.1.6 Another Implentation:
         Expected Behavior:
         This is supposed to only use 1 round from each ammo container slot per weapon use -->
+    <StatusEffect type="OnUse" target="Contained" targetslot="0"><Use /></StatusEffect>
     <StatusEffect type="OnUse" target="Contained" targetslot="1"><Use /></StatusEffect>
     <StatusEffect type="OnUse" target="Contained" targetslot="2"><Use /></StatusEffect>
     <StatusEffect type="OnUse" target="Contained" targetslot="3"><Use /></StatusEffect>
-    <StatusEffect type="OnUse" target="Contained" targetslot="4"><Use /></StatusEffect>
     <RequiredItems items="shotgunammo" type="Contained" msg="ItemMsgAmmoRequired" />
     <RequiredSkill identifier="weapons" level="90" />
   </RangedWeapon>

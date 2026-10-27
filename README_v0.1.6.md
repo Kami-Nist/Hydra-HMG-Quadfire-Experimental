@@ -1,4 +1,4 @@
-Hydra HMG - Quadfire Experimental v0.1.6
+Hydra HMG - Quadfire Experimental v0.1.7
 
 Branch source: proven Hydra v0.1.2 architecture checkpoint.
 
@@ -18,3 +18,6 @@ Load one identical vanilla shotgun-ammo item into each of the four ammo slots. F
 
 v0.1.2 remains the frozen clean architecture baseline.
 v0.1.3 duplicated RequiredItems and remained Bang x1; that failed experiment is NOT inherited here.
+v0.1.4 added Volleyfire function.
+v0.1.5 was an attempt at making the rounds increment from max to min (12 -> 1)
+v0.1.6 was an another implementation attempt from slots 0-3 rather from 1-4
