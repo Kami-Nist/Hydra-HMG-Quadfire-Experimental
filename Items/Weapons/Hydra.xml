@@ -58,21 +58,14 @@
          four-slot ammo container. Inventory topology remains unchanged. | Volley Fire -->
     <!-- TODO: Implement a feature that makes it so that the weapon "Volley Fires" but increments the ammunition usage down by 1 for each
           rounds in each ammo container. Count from slotindex 1-4. Flashlight slotindex = 0 -->
-    <!-- v0.1.5 Quadfire Volley Increment:
-        Expected Behavior: 
-        Each successful weapon use will decrement the ammunition in each slot of the container by 1, starting from slotindex 1 to 4. -->
-    <StatusEffect type="OnUse" target="Contained" slotindex = "1">
-      <Use />
-    </StatusEffect>
-    <StatusEffect type="OnUse" target="Contained" slotindex = "2">
-      <Use />
-    </StatusEffect>
-    <StatusEffect type="OnUse" target="Contained" slotindex = "3">
-      <Use />
-    </StatusEffect>
-    <StatusEffect type="OnUse" target="Contained" slotindex = "4">
-      <Use />
-    </StatusEffect>
+    <!-- Reverted from 0.1.5, Quadfire Volley dumped all the ammo in all 4 regardless. -->
+    <!-- v0.1.6 Another Implentation:
+        Expected Behavior:
+        This is supposed to only use 1 round from each ammo container slot per weapon use -->
+    <StatusEffect type="OnUse" target="Contained" targetslot="1"><Use /></StatusEffect>
+    <StatusEffect type="OnUse" target="Contained" targetslot="2"><Use /></StatusEffect>
+    <StatusEffect type="OnUse" target="Contained" targetslot="3"><Use /></StatusEffect>
+    <StatusEffect type="OnUse" target="Contained" targetslot="4"><Use /></StatusEffect>
     <RequiredItems items="shotgunammo" type="Contained" msg="ItemMsgAmmoRequired" />
     <RequiredSkill identifier="weapons" level="90" />
   </RangedWeapon>
