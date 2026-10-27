@@ -59,7 +59,8 @@
     <!-- TODO: Implement a feature that makes it so that the weapon "Volley Fires" but increments the ammunition usage down by 1 for each
           rounds in each ammo container. Count from slotindex 1-4. Flashlight slotindex = 0 -->
     <!-- v0.1.5 Quadfire Volley Increment:
-        Expected Behavior: Each successful weapon use will decrement the ammunition in each slot of the container by 1, starting from slotindex 1 to 4. -->
+        Expected Behavior: 
+        Each successful weapon use will decrement the ammunition in each slot of the container by 1, starting from slotindex 1 to 4. -->
     <StatusEffect type="OnUse" target="Contained" slotindex = "1">
       <Use />
     </StatusEffect>
